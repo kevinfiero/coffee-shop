@@ -1,1 +1,1 @@
-# coffee-shop
+# lab-06-e-commerce-site
