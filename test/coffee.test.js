@@ -1,6 +1,6 @@
 // IMPORT MODULES under test here:
 import { renderCoffee } from '../products/product-utils.js';
-import { findByID, calcLineItem, renderLineItem } from '../cart/cart-utils.js';
+import { findByID, calcLineItem, renderLineItem, calcOrderTotal } from '../cart/cart-utils.js';
 
 const test = QUnit.test;
 
@@ -16,34 +16,45 @@ const frenchRoast =
             price: 16
         };
 
-const hairBender =
-        {
-            id: 'hair-bender-12oz',
-            name: 'Hair Bender',
-            image: 'hair-bender.png',
-            description: '12oz Hair Bender',
-            category: 'Organic',
-            price: 15
-        };
-
-const hollerMountain =
+const ndaroini =
     {
-        id: 'holler-mountatin-12oz',
-        name: 'Holler Mountain',
-        image: 'holler-mountain.png',
-        description: '12oz Holler Mountain',
-        category: 'Organic',
-        price: 16
+        id: 'ndaroini-12oz',
+        name: 'Kenya Ndaroini',
+        image: 'ndaroini.png',
+        description: '12oz Kenya Ndaroini',
+        category: 'Single Origin Orangic',
+        price: 19
     };
 
-const cartLineItem =    
+const houseBlend =
+    {
+        id: 'house-blend-12oz',
+        name: 'House Blend',
+        image: 'house-blend.png',
+        description: '12oz House Blend',
+        category: 'Organic',
+        price: 15
+    };
+
+const frenchRoastCart =    
     {
         id: 'french-roast-12oz',
         quantity: 3
     };
-    
 
-test('test rendering French Roast coffee', (expect) => {
+const houseBlendCart =  
+    {
+        id: 'house-blend-12oz',
+        quantity: 4
+    };
+
+const ndaroiniCart =  
+    {
+        id: 'ndaroini-12oz',
+        quantity: 1
+    };
+    
+test('test renderCoffee', (expect) => {
 
 
     const actual = renderCoffee(frenchRoast).outerHTML;
@@ -53,14 +64,14 @@ test('test rendering French Roast coffee', (expect) => {
     expect.equal(actual, expected);
 });
 
-test('test finding object by ID', (expect) => {
+test('test findByID', (expect) => {
 
-    const coffeeArray = [frenchRoast, hairBender, hollerMountain];
+    const coffeeArray = [frenchRoast, ndaroini, houseBlend];
 
-    const id = 'hair-bender-12oz';
+    const id = 'ndaroini-12oz';
 
     const actual1 = findByID(coffeeArray, id);
-    const expected1 = hairBender;
+    const expected1 = ndaroini;
 
     const actual2 = findByID(coffeeArray, 'fakeID');
     const expected2 = null;
@@ -69,7 +80,7 @@ test('test finding object by ID', (expect) => {
     expect.equal(actual2, expected2);
 });
 
-test('test multiply quantity and amount', (expect) => {
+test('test calcLineItem', (expect) => {
 
     const quantity1 = 5;
     const amount1 = 10;
@@ -86,10 +97,21 @@ test('test multiply quantity and amount', (expect) => {
     expect.equal(actual2, expected2);
 });
 
-test('test DOM render', (expect) => {
+test('test renderLineItem', (expect) => {
 
-    const actual = renderLineItem(cartLineItem, frenchRoast).outerHTML;
+    const actual = renderLineItem(frenchRoastCart, frenchRoast).outerHTML;
     const expected = '<tr><td>French Roast</td><td>$16</td><td>3</td><td>$48</td></tr>';
+
+    expect.equal(actual, expected);
+
+});
+
+test('test calcOrderTotal', (expect) => {
+    const cartArray = [frenchRoastCart, houseBlendCart, ndaroiniCart];
+    const coffeeArray = [frenchRoast, ndaroini, houseBlend];
+
+    const actual = calcOrderTotal(cartArray, coffeeArray);
+    const expected = 127;
 
     expect.equal(actual, expected);
 

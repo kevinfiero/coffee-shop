@@ -26,6 +26,18 @@ export function renderLineItem(cartLineItem, product){
     tr.append(productTD, costTD, quantityTD, totalTD);
     return tr;
 
+}
 
+export function calcOrderTotal(cartArray, productArray){
+    
+    let totalCost = 0;
 
+    for (let i = 0; i < cartArray.length; i++){
+        const cartItem = cartArray[i];
+        const product = findByID(productArray, cartItem.id);
+        const lineCost = calcLineItem(cartItem.quantity, product.price);
+        totalCost = totalCost + lineCost; 
+    }
+
+    return totalCost;
 }
