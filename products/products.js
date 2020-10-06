@@ -1,5 +1,5 @@
 import { coffees } from '../coffee.js';
-import { renderCoffee } from '../utils.js';
+import { renderCoffee } from './product-utils.js';
 
 const ul = document.querySelector('#productList');
 
