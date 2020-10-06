@@ -19,12 +19,7 @@ export function renderCoffee(coffee){
     buttonAdd.id = coffee.id;
     buttonAdd.textContent = 'Add to Cart';
 
-
-    li.appendChild(h2);
-    li.appendChild(img);
-    li.appendChild(h3_1);
-    li.appendChild(h3_2);
-    li.appendChild(buttonAdd);
+    li.append(h2, img, h3_1, h3_2, buttonAdd);
 
     return li;
 }
