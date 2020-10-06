@@ -1,1 +1,9 @@
-/* add home page styles here */
+section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 300px;
+    font-size: 32px;
+}

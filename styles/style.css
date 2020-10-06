@@ -2,7 +2,6 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #fff1e6;
-
 }
 
 header {
@@ -12,6 +11,7 @@ header {
     justify-content: space-between;
     border-bottom: 2px solid black;
     margin-bottom: 10px;
+    background-color: #b7b7a4;
 }
 
 main {
@@ -27,7 +27,6 @@ main {
     height: 60px;
     align-content: center;
     justify-content: center;
-
 }
 
 #icon-group{
