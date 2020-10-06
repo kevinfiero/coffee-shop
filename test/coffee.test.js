@@ -1,6 +1,6 @@
 // IMPORT MODULES under test here:
 import { renderCoffee } from '../products/product-utils.js';
-import { findByID } from '../cart/cart-utils.js';
+import { findByID, calcLineItem } from '../cart/cart-utils.js';
 
 const test = QUnit.test;
 
@@ -58,9 +58,29 @@ test('test finding object by ID', (expect) => {
 
     const id = 'hair-bender-12oz';
 
-    const actual = findByID(coffeeArray, id);
-    const expected = hairBender;
-    
+    const actual1 = findByID(coffeeArray, id);
+    const expected1 = hairBender;
 
-    expect.equal(actual, expected);
+    const actual2 = findByID(coffeeArray, 'fakeID');
+    const expected2 = null;
+
+    expect.equal(actual1, expected1);
+    expect.equal(actual2, expected2);
+});
+
+test('test finding object by ID', (expect) => {
+
+    const quantity1 = 5;
+    const amount1 = 10;
+    const quantity2 = 1.26;
+    const amount2 = 7;
+
+    const actual1 = calcLineItem(quantity1, amount1);
+    const expected1 = 50;
+
+    const actual2 = calcLineItem(quantity2, amount2);
+    const expected2 = 8.82;
+
+    expect.equal(actual1, expected1);
+    expect.equal(actual2, expected2);
 });
