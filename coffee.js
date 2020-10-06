@@ -1,4 +1,4 @@
-export const coffee = [
+export const coffees = [
     {
         id: 'french-roast-12oz',
         name: 'French Roast',
