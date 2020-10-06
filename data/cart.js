@@ -1,4 +1,4 @@
-export const coffees = [
+export const cart = [
     {
         id: 'french-roast-12oz',
         quantity: 3
