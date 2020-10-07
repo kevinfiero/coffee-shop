@@ -1,4 +1,4 @@
-import { findByID } from '../cart/cart-utils.js';
+import { setInLocalStorage, getFromLocalStorage, findByID } from '../utils.js';
 
 export function renderCoffee(coffee){
 
@@ -21,53 +21,36 @@ export function renderCoffee(coffee){
     buttonAdd.id = coffee.id;
     buttonAdd.textContent = 'Add to Cart';
 
-    buttonAdd.addEventListener('click', () => {
-        const cartString = 'cart';
-        const localStorageCart = getFromLocalStorage(cartString) || [];
-        console.log(localStorageCart);
-        //NOTE: Move findByID to another util function since it spans product and cart
-        const currentCartProduct = findByID(localStorageCart, coffee.id); 
-        console.log(currentCartProduct);
-
-
-        if (currentCartProduct === null){
-
-            console.log('create');
-            const currentCartItem = {
-                id: coffee.id,
-                quantity: 1
-            };
-
-            localStorageCart.push(currentCartItem);
-            console.log(localStorageCart);
-
-        } else {
-            
-            console.log('plus');
-            currentCartProduct.quantity++;
-            
-        }
-        setInLocalStorage(cartString, localStorageCart);
-    });
+    renderButtonListener(buttonAdd, coffee.id);
 
     li.append(h2, img, h3_1, h3_2, buttonAdd);
 
     return li;
 }
 
+function renderButtonListener(buttonAdd, id){
 
-function getFromLocalStorage(key){
+    buttonAdd.addEventListener('click', () => {
+        const cartString = 'cart';
+        const localStorageCart = getFromLocalStorage(cartString) || [];
+        const currentCartProduct = findByID(localStorageCart, id); 
 
-    return JSON.parse(localStorage.getItem(key));
+        if (currentCartProduct === null){
+
+            const currentCartItem = {
+                id: id,
+                quantity: 1
+            };
+
+            localStorageCart.push(currentCartItem);
+
+        } else {
+
+            currentCartProduct.quantity++;
+            
+        }
+        setInLocalStorage(cartString, localStorageCart);
+    });
+
 
 }
-
-function setInLocalStorage(key, value){
-
-    localStorage.setItem(key, JSON.stringify(value));
-
-}
-
-
-
-
