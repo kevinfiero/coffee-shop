@@ -9,11 +9,24 @@ tr{
     border: 1px solid black;
 }
 
+tr:nth-child(even){
+    background-color: #ade8f4;
+}
+
+
+tr:nth-child(odd){
+    background-color: #ffdab9;
+}
+
 td, th{
     text-align: center;
     padding: 3px;
     border: 1px solid black;
     margin: -10px;
+}
+
+th, tr:last-child{
+    font-weight: 800;
 }
 
 button{
