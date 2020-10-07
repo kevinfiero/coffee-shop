@@ -1,11 +1,4 @@
-export function findByID(array, id){
-    for (const element of array){
-        if (element.id === id){
-            return element;
-        }
-    }
-    return null;
-}
+import { findByID } from '../utils.js';
 
 export function calcLineItem(quantity, amount){
     return Number(quantity) * Number(amount);
@@ -36,4 +29,8 @@ export function calcOrderTotal(cartArray, productArray){
     }
 
     return totalCost;
+}
+
+export function togglePlaceOrderButton(button, state){
+    button.disabled = state;
 }
