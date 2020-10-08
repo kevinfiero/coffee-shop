@@ -21,5 +21,20 @@ h2{
     padding: 10px;
     font: size 18px;
     background-color: #bee3db;
+    width: 275px;
+    height: 375px;
 }
 
+#productList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+
+li > img{
+    width: 240px;
+    height: 200px;
+}
