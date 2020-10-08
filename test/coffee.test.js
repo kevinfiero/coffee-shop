@@ -2,7 +2,8 @@
 import { renderCoffee } from '../products/product-utils.js';
 import { calcLineItem, renderLineItem, calcOrderTotal } from '../cart/cart-utils.js';
 import { clearCart, getCart, setCart } from '../cart-api.js';
-import { findByID } from '../utils.js';
+import { findByID, getFromLocalStorage } from '../utils.js';
+import { addProduct } from '../product-form/form-util.js';
 
 // Static Test Data
 
@@ -130,4 +131,34 @@ test('test setCart(), getCart(), clearCart()', (expect) => {
     //if these pass it is assumed the functions work correctly
     expect.equal(actual1, expected1);
     expect.equal(actual2, expected2);
+});
+
+
+test('test addProduct()', (expect) => {
+
+    // create a new coffee object
+    const expected = 
+    {
+        id: 'bella-vista-12oz',
+        name: 'Bella Vista',
+        image: 'bella-vista.png',
+        description: '12oz Bella Vista',
+        category: 'Single Origin',
+        price: 20
+    };
+
+    // add product using function
+    addProduct(expected);
+
+    // get PRODUCTS array from local storage that was just added using addProduct
+    const localStorageArray = getFromLocalStorage('PRODUCTS');
+
+    // get the index of the last element that was added to PRODUCTS array
+    const j = localStorageArray.length - 1;
+
+    // get the actual object that was added to PRODUCTS array using addProduct
+    const actual = localStorageArray[j];
+    
+    // compare stand alone coffee object to the coffee object pulled from local storage
+    expect.deepEqual(actual, expected);
 });
