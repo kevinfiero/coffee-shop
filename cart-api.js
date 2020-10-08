@@ -1,4 +1,4 @@
-import { setInLocalStorage, getFromLocalStorage } from '/utils.js';
+import { setInLocalStorage, getFromLocalStorage } from './utils.js';
 
 export function clearCart(){
     localStorage.removeItem('cart');
