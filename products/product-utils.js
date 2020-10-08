@@ -16,12 +16,15 @@ export function renderCoffee(coffee){
 
     const h3_2 = document.createElement('h3');
     h3_2.textContent = `$${coffee.price.toFixed(2)}`;
-    
+
+ 
+
     const buttonAdd = document.createElement('button');
     buttonAdd.id = coffee.id;
     buttonAdd.textContent = 'Add to Cart';
 
     const selectQuantity = document.createElement('select');
+
     //loop to create
     selectQuantity.innerHTML = '<select><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option></select>';
 
@@ -56,7 +59,7 @@ function renderButtonListener(buttonAdd, id){
 
         } else {
 
-            currentCartProduct.quantity = currentCartProduct.quantity + currentQuantity.quantity;
+            currentCartProduct.quantity = Number(currentCartProduct.quantity) + Number(currentQuantity.quantity);
             
         }
         setInLocalStorage(cartString, localStorageCart);
