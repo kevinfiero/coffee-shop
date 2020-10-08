@@ -1,13 +1,13 @@
 // Import data and functions
 import { coffees } from '../data/coffee.js';
 import { renderLineItem, calcOrderTotal, hideCartElements } from './cart-utils.js';
-import { getFromLocalStorage, findByID } from '../utils.js';
+import { findByID } from '../utils.js';
+import { clearCart, getCart } from '../cart-api.js';
 
 const tbody = document.querySelector('#cartTable'); 
 const table = document.getElementsByTagName('table')[0]; 
 const messageSection = document.getElementsByTagName('section')[0]; 
-const cartString = 'cart';
-const localStorageCart = getFromLocalStorage(cartString) || [];
+const localStorageCart = getCart() || [];
 const placeOrderButton = document.getElementById('place-order');
 
 hideCartElements(placeOrderButton, table, messageSection, true);
@@ -41,7 +41,10 @@ placeOrderButton.addEventListener('click', () => {
     const alertString = JSON.stringify(localStorageCart, true, 2);
     alert(alertString);
     window.location.replace('../index.html');
-    localStorage.removeItem(cartString);
+
+    clearCart();
+    
     hideCartElements(placeOrderButton, table, messageSection, true);
 
 });
+
