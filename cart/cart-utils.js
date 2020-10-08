@@ -31,8 +31,7 @@ export function calcOrderTotal(cartArray, productArray){
     return totalCost;
 }
 
-//Refactor this function
-export function hideCartElements(button, table, messageSection, state){
+export function toggleCartElements(button, table, messageSection, state){
 
     if (state === true){
         button.style.display = 'none';

@@ -9,5 +9,5 @@ export function getCart(){
 }
 
 export function setCart(cart){
-    return setInLocalStorage('cart', cart);
+    setInLocalStorage('cart', cart);
 }

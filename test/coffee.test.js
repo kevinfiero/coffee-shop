@@ -1,6 +1,8 @@
 // IMPORT MODULES under test here:
 import { renderCoffee } from '../products/product-utils.js';
-import { findByID, calcLineItem, renderLineItem, calcOrderTotal } from '../cart/cart-utils.js';
+import { calcLineItem, renderLineItem, calcOrderTotal } from '../cart/cart-utils.js';
+import { clearCart, getCart, setCart } from '../cart-api.js';
+import { findByID } from '../utils.js';
 
 // Static Test Data
 
@@ -58,7 +60,7 @@ const test = QUnit.test;
 
 test('test renderCoffee', (expect) => {
     const actual = renderCoffee(frenchRoast).outerHTML;
-    const expected = '<li class="product"><h2>French Roast</h2><img src="../assets/french-roast.png"><h3>12oz French Roast</h3><h3>$16.00</h3><button id="french-roast-12oz">Add to Cart</button></li>';
+    const expected = '<li class="product"><h2>French Roast</h2><img src="../assets/french-roast.png"><h3>12oz French Roast</h3><h3>$16.00</h3><select><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select><button id="french-roast-12oz">Add to Cart</button></li>';
     expect.equal(actual, expected);
 });
 
@@ -98,4 +100,34 @@ test('test calcOrderTotal', (expect) => {
     const actual = calcOrderTotal(cartArray, coffeeArray);
     const expected = 127;
     expect.equal(actual, expected);
+});
+
+
+test('test getCart()', (expect) => {
+
+    const cartArray = [frenchRoastCart, houseBlendCart, ndaroiniCart];
+    setCart(cartArray);
+    const actual = JSON.stringify(getCart());
+    const expected = localStorage.getItem('cart');
+    expect.equal(actual, expected);
+
+});
+
+test('test setCart(), getCart(), clearCart()', (expect) => {
+
+    const cartArray = [frenchRoastCart, houseBlendCart, ndaroiniCart];
+
+    // setting cart array and getting cart array to verify
+    setCart(cartArray);
+    const actual1 = JSON.stringify(getCart());
+    const expected1 = localStorage.getItem('cart');
+
+    //clearing previous cart array so value should be null
+    clearCart();
+    const actual2 = getCart();
+    const expected2 = null;
+
+    //if these pass it is assumed the functions work correctly
+    expect.equal(actual1, expected1);
+    expect.equal(actual2, expected2);
 });
