@@ -31,6 +31,17 @@ export function calcOrderTotal(cartArray, productArray){
     return totalCost;
 }
 
-export function togglePlaceOrderButton(button, state){
-    button.disabled = state;
+//Refactor this function
+export function hideCartElements(button, table, messageSection, state){
+
+    if (state === true){
+        button.style.display = 'none';
+        table.style.display = 'none';
+        messageSection.style.display = 'inline';
+    } else {
+        button.style.display = 'block';
+        table.style.display = 'table';
+        messageSection.style.display = 'none';
+    }
+
 }
