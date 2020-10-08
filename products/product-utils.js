@@ -1,4 +1,5 @@
 import { setInLocalStorage, getFromLocalStorage, findByID } from '../utils.js';
+import { getCart, setCart } from '../cart-api.js';
 
 export function renderCoffee(coffee){
 
@@ -17,17 +18,12 @@ export function renderCoffee(coffee){
     const h3_2 = document.createElement('h3');
     h3_2.textContent = `$${coffee.price.toFixed(2)}`;
 
- 
-
     const buttonAdd = document.createElement('button');
     buttonAdd.id = coffee.id;
     buttonAdd.textContent = 'Add to Cart';
 
     const selectQuantity = document.createElement('select');
-
-    //loop to create
-    selectQuantity.innerHTML = '<select><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option></select>';
-
+    selectQuantity.innerHTML = populateSelector();
     renderButtonListener(buttonAdd, coffee.id);
 
     renderSelectorListener(selectQuantity, coffee.id);
@@ -40,8 +36,7 @@ export function renderCoffee(coffee){
 function renderButtonListener(buttonAdd, id){
 
     buttonAdd.addEventListener('click', () => {
-        const cartString = 'cart';
-        const localStorageCart = getFromLocalStorage(cartString) || [];
+        const localStorageCart = getCart() || [];
         const currentCartProduct = findByID(localStorageCart, id); 
 
         const quantityString = 'quantity';
@@ -54,18 +49,14 @@ function renderButtonListener(buttonAdd, id){
                 id: id,
                 quantity: currentQuantity.quantity
             };
-
             localStorageCart.push(currentCartItem);
 
         } else {
 
             currentCartProduct.quantity = Number(currentCartProduct.quantity) + Number(currentQuantity.quantity);
-            
         }
-        setInLocalStorage(cartString, localStorageCart);
+        setCart(localStorageCart);
     });
-
-
 }
 
 function renderSelectorListener(selectQuantity, id){
@@ -82,18 +73,26 @@ function renderSelectorListener(selectQuantity, id){
                 id: id,
                 quantity: e.target.value
             };
-
             localStorageQuantity.push(currentQuantityItem);
 
         } else {
 
             currentQuantity.quantity = e.target.value;
-            
         }
         setInLocalStorage(quantityString, localStorageQuantity);
-
     });
-
-
-
 }
+
+function populateSelector(){
+    let str = '<select>';
+
+    for (var i = 1; i < 11; i++){
+        str = str + `<option value=${i}>${i}</option>`;
+    }
+    str = str + '</select>';
+
+    return str;
+}
+
+    
+   
