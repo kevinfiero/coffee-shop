@@ -10,6 +10,8 @@ const cartString = 'cart';
 const localStorageCart = getFromLocalStorage(cartString) || [];
 const placeOrderButton = document.getElementById('place-order');
 
+hideCartElements(placeOrderButton, table, messageSection, true);
+
 if (localStorageCart.length > 0){
 
     const tr = document.createElement('tr');
