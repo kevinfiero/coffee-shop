@@ -1,5 +1,6 @@
 import { setInLocalStorage, getFromLocalStorage, findByID } from '../utils.js';
 import { getCart, setCart } from '../cart-api.js';
+import { coffees } from '../data/coffee.js';
 
 export function renderCoffee(coffee){
 
@@ -24,6 +25,7 @@ export function renderCoffee(coffee){
 
     const selectQuantity = document.createElement('select');
     selectQuantity.innerHTML = populateSelector();
+
     renderButtonListener(buttonAdd, coffee.id);
 
     renderSelectorListener(selectQuantity, coffee.id);
@@ -31,6 +33,22 @@ export function renderCoffee(coffee){
     li.append(h2, img, h3_1, h3_2, selectQuantity, buttonAdd);
 
     return li;
+}
+
+export function initializeQuantity(){
+
+    const quantityArray = [];
+
+    for (let i = 0; i < coffees.length; i++){
+
+        const thisQuantity = {
+            id: coffees[i].id,
+            quantity: 1
+        };
+
+        quantityArray.push(thisQuantity);
+    }
+    setInLocalStorage('quantity', quantityArray);
 }
 
 function renderButtonListener(buttonAdd, id){
@@ -65,6 +83,7 @@ function renderSelectorListener(selectQuantity, id){
 
         const quantityString = 'quantity';
         const localStorageQuantity = getFromLocalStorage(quantityString) || [];
+
         const currentQuantity = findByID(localStorageQuantity, id); 
 
         if (currentQuantity === null){
@@ -93,6 +112,3 @@ function populateSelector(){
 
     return str;
 }
-
-    
-   

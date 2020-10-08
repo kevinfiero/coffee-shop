@@ -1,6 +1,6 @@
 // Import data and functions
 import { coffees } from '../data/coffee.js';
-import { renderLineItem, calcOrderTotal, hideCartElements } from './cart-utils.js';
+import { renderLineItem, calcOrderTotal, toggleCartElements } from './cart-utils.js';
 import { findByID } from '../utils.js';
 import { clearCart, getCart } from '../cart-api.js';
 
@@ -10,7 +10,7 @@ const messageSection = document.getElementsByTagName('section')[0];
 const localStorageCart = getCart() || [];
 const placeOrderButton = document.getElementById('place-order');
 
-hideCartElements(placeOrderButton, table, messageSection, true);
+toggleCartElements(placeOrderButton, table, messageSection, true);
 
 if (localStorageCart.length > 0){
 
@@ -25,7 +25,7 @@ if (localStorageCart.length > 0){
         tbody.appendChild(td);
     }
 
-    hideCartElements(placeOrderButton, table, messageSection, false);
+    toggleCartElements(placeOrderButton, table, messageSection, false);
     const totalLineTD = document.createElement('tr');
     const total = calcOrderTotal(localStorageCart, coffees);
     totalLineTD.innerHTML = `<tr><td colspan="3">Total</td><td>$${total}</td></tr>`;
@@ -33,7 +33,7 @@ if (localStorageCart.length > 0){
 
 } else {
 
-    hideCartElements(placeOrderButton, table, messageSection, true);
+    toggleCartElements(placeOrderButton, table, messageSection, true);
 }
 
 placeOrderButton.addEventListener('click', () => {
@@ -44,7 +44,7 @@ placeOrderButton.addEventListener('click', () => {
 
     clearCart();
     
-    hideCartElements(placeOrderButton, table, messageSection, true);
+    toggleCartElements(placeOrderButton, table, messageSection, true);
 
 });
 
