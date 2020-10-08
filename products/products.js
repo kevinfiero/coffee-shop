@@ -1,4 +1,5 @@
 import { coffees } from '../data/coffee.js';
+import { setInLocalStorage } from '../utils.js';
 import { renderCoffee } from './product-utils.js';
 
 const ul = document.querySelector('#productList');
