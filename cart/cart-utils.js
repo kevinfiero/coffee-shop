@@ -24,14 +24,20 @@ export function calcOrderTotal(cartArray, productArray){
     for (let i = 0; i < cartArray.length; i++){
         const cartItem = cartArray[i];
         const product = findByID(productArray, cartItem.id);
-        const lineCost = calcLineItem(cartItem.quantity, product.price);
-        totalCost = totalCost + lineCost; 
+        if (product !== null){
+            const lineCost = calcLineItem(cartItem.quantity, product.price);
+            totalCost = totalCost + lineCost; 
+        }
     }
-
     return totalCost;
 }
 
-export function toggleCartElements(button, table, messageSection, state){
+export function toggleCartElements(state){
+
+    const table = document.getElementsByTagName('table')[0]; 
+    
+    const messageSection = document.getElementsByTagName('section')[0]; 
+    const button = document.getElementById('place-order');
 
     if (state === true){
         button.style.display = 'none';
@@ -42,5 +48,4 @@ export function toggleCartElements(button, table, messageSection, state){
         table.style.display = 'table';
         messageSection.style.display = 'none';
     }
-
 }

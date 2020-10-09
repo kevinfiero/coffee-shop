@@ -5,6 +5,7 @@ import { getFromLocalStorage } from '../utils.js';
 
 const ul = document.querySelector('#productList');
 
+
 seedAndGetProducts();
 initializeQuantity();
 
