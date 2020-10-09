@@ -3,13 +3,12 @@ import { coffees } from '../data/coffee.js';
 import { initializeQuantity } from '../products/product-utils.js';
 
 export function addProduct(newProduct){
-    const PRODUCTS = 'PRODUCTS';
 
     seedAndGetProducts();
 
-    let currentProductsArray = getFromLocalStorage(PRODUCTS);
+    let currentProductsArray = getFromLocalStorage('PRODUCTS');
     currentProductsArray.push(newProduct);
-    setInLocalStorage(PRODUCTS, currentProductsArray);
+    setInLocalStorage('PRODUCTS', currentProductsArray);
     initializeQuantity();
 }
 
