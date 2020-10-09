@@ -4,12 +4,14 @@ import { findByID, getFromLocalStorage } from '../utils.js';
 import { clearCart, getCart } from '../cart-api.js';
 
 const tbody = document.querySelector('#cartTable'); 
-const table = document.getElementsByTagName('table')[0]; 
-const messageSection = document.getElementsByTagName('section')[0]; 
 const localStorageCart = getCart() || [];
 const placeOrderButton = document.getElementById('place-order');
 
-toggleCartElements(placeOrderButton, table, messageSection, true);
+if (getCart() === null){
+    toggleCartElements(true);
+}
+
+toggleCartElements(true);
 const coffees = getFromLocalStorage('PRODUCTS');
 if (localStorageCart.length > 0){
 
@@ -20,11 +22,15 @@ if (localStorageCart.length > 0){
     for (let i = 0; i < localStorageCart.length; i++){
         const cartItem = localStorageCart[i];
         const product = findByID(coffees, cartItem.id);
-        const td = renderLineItem(cartItem, product);
-        tbody.appendChild(td);
+
+        if (product !== null){
+            const td = renderLineItem(cartItem, product);
+            tbody.appendChild(td);
+        }
+
     }
 
-    toggleCartElements(placeOrderButton, table, messageSection, false);
+    toggleCartElements(false);
     const totalLineTD = document.createElement('tr');
     const total = calcOrderTotal(localStorageCart, coffees);
     totalLineTD.innerHTML = `<tr><td colspan="3">Total</td><td>$${total}</td></tr>`;
@@ -32,7 +38,7 @@ if (localStorageCart.length > 0){
 
 } else {
 
-    toggleCartElements(placeOrderButton, table, messageSection, true);
+    toggleCartElements(true);
 }
 
 placeOrderButton.addEventListener('click', () => {
@@ -43,7 +49,7 @@ placeOrderButton.addEventListener('click', () => {
 
     clearCart();
     
-    toggleCartElements(placeOrderButton, table, messageSection, true);
+    toggleCartElements(true);
 
 });
 
