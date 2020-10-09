@@ -1,14 +1,10 @@
-//import { coffees } from '../data/coffee.js';
-//import { renderCoffee, initializeQuantity } from './product-utils.js';
 import { seedAndGetProducts } from './product-form/form-util.js';
 import { getFromLocalStorage, setInLocalStorage, findByID } from './utils.js';
 import { getCart, setCart } from './cart-api.js';
-import { toggleCartElements } from './cart/cart-utils.js';
 
 const ul = document.querySelector('#removeList');
 
 seedAndGetProducts();
-
 
 const coffees = getFromLocalStorage('PRODUCTS');
 
@@ -40,7 +36,6 @@ export function renderDelete(coffee){
 
     return li;
 }
-
 
 function renderRemoveListener(buttonDelete, id){
 
