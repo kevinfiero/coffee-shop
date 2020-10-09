@@ -19,35 +19,39 @@
         <a href = '../index.html'><img class = 'header-icons' title='Home' src='../assets/home.svg'></a>
         <a href = '../products/index.html'><img class = 'header-icons' title ='Coffee Selection' src='../assets/coffee-cup.svg'></a>
         <a href = '../cart/index.html'><img class = 'header-icons' title ='Shopping Cart' src='../assets/shopping-cart.svg'></a>
-        <a href = 'index.html'><img class = 'header-icons' title ='Add Coffee Listing' src='../assets/add.svg'></a>
+        <a href = 'index.html'><img class = 'header-icons' title ='Modify Product Listing' src='../assets/settings.svg'></a>
     </div>
 </header>
 
 <body>
     <main>
-        <h1>Add A New Coffee Product!</h1>
+        <h1>Add A New Product</h1>
         <div>
             <form id='add-form'>
                 <label>ID
-                    <input name='id'>
+                    <input placeholder='bella-vista-12oz' name='id'>
                 </label>
                 <label>Name
-                    <input name='name'>
+                    <input placeholder='Bella Vista' name='name'>
                 </label>
                 <label>Image
-                    <input name='image'>
+                    <input placeholder='bella-vista.png' name='image'>
                 </label>
                 <label>Description
-                    <input name='description'>
+                    <input placeholder='12oz Bella Vista' name='description'>
                 </label>
                 <label>Category
-                    <input name='category'>
+                    <input placeholder='Single Origin' name='category'>
                 </label>
                 <label>Price
-                    <input name='price'>
+                    <input placeholder='20' name='price'>
                 </label>
                 <button id='submit-form'>Submit</button>
             </form>
+        </div>
+        <h1>Remove Products From Shop</h1>
+            <ul id='removeList'>
+            </ul>
         </div>
     </main>
     <script type="module" src="form.js"></script>
