@@ -1,7 +1,6 @@
-// Import data and functions
-import { coffees } from '../data/coffee.js';
+//import { coffees } from '../data/coffee.js';
 import { renderLineItem, calcOrderTotal, toggleCartElements } from './cart-utils.js';
-import { findByID } from '../utils.js';
+import { findByID, getFromLocalStorage } from '../utils.js';
 import { clearCart, getCart } from '../cart-api.js';
 
 const tbody = document.querySelector('#cartTable'); 
@@ -11,7 +10,7 @@ const localStorageCart = getCart() || [];
 const placeOrderButton = document.getElementById('place-order');
 
 toggleCartElements(placeOrderButton, table, messageSection, true);
-
+const coffees = getFromLocalStorage('PRODUCTS');
 if (localStorageCart.length > 0){
 
     const tr = document.createElement('tr');
