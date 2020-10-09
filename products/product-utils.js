@@ -1,6 +1,6 @@
 import { setInLocalStorage, getFromLocalStorage, findByID } from '../utils.js';
 import { getCart, setCart } from '../cart-api.js';
-import { coffees } from '../data/coffee.js';
+//import { coffees } from '../data/coffee.js';
 
 export function renderCoffee(coffee){
 
@@ -38,12 +38,12 @@ export function renderCoffee(coffee){
 export function initializeQuantity(){
 
     const quantityArray = [];
-
+    const coffees = getFromLocalStorage('PRODUCTS');
     for (let i = 0; i < coffees.length; i++){
 
         const thisQuantity = {
             id: coffees[i].id,
-            quantity: 1
+            quantity: Number(1)
         };
 
         quantityArray.push(thisQuantity);
